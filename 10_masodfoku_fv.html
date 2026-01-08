@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Másodfokú függvények</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            orphans: 3;
+            widows: 3;
+        }
+        
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        .student-info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .student-info input {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fafafa;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+        }
+        
+        .question label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .options {
+            margin: 10px 0;
+        }
+        
+        .options label {
+            display: block;
+            margin: 8px 0;
+            font-weight: normal;
+            padding: 5px;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: vertical;
+            box-sizing: border-box;
+            min-height: 100px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        iframe {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 15px 0;
+            max-width: 100%;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        /* Nyomtatási stílusok */
+        @media print {
+            body {
+                max-width: 100%;
+                padding: 10px;
+            }
+            
+            .button-container {
+                display: none;
+            }
+            
+            /* Intelligens oldaltörés kezelés */
+            .question {
+                page-break-inside: avoid;
+                page-break-after: auto;
+                border: 1px solid #ddd;
+                margin-bottom: 20px;
+            }
+            
+            /* Az iframe-eket megtartjuk nyomtatáskor */
+            iframe {
+                page-break-inside: avoid;
+                page-break-before: auto;
+                page-break-after: avoid;
+                margin: 10px 0;
+                display: block;
+            }
+            
+            /* Textarea-k is maradjanak egyben */
+            textarea {
+                page-break-inside: avoid;
+                display: block;
+                border: 1px solid #999;
+                min-height: 80px;
+            }
+            
+            /* Input mezők */
+            input[type="text"] {
+                page-break-inside: avoid;
+                border: 1px solid #999;
+            }
+            
+            /* Ha egy kérdésben iframe + textarea van */
+            iframe + label,
+            iframe + div,
+            iframe + textarea {
+                page-break-before: avoid;
+            }
+            
+            /* Címkék és input mezők együtt */
+            label {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            
+            /* Radio gombok csoportja */
+            .options {
+                page-break-inside: avoid;
+            }
+            
+            /* Fejléc ne törjön el */
+            h2, .student-info {
+                page-break-after: avoid;
+            }
+        }
+        
+        /* Responsív dizájn mobilra */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            iframe {
+                width: 100% !important;
+                height: 400px !important;
+            }
+            
+            .student-info input {
+                width: 100%;
+            }
+            
+            textarea, input[type="text"] {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Másodfokú függvények - ONLINE FELADATLAP</h2>
+    
+    <div class="student-info">
+        <label for="tanuloNev">Név, osztály: 
+            <input type="text" id="tanuloNev" placeholder="Tanuló neve, osztálya" required>
+        </label>
+    </div>
+    
+    <form id="feladatForm">
+        <div class="question">
+            <label>1. Az ábrán három másodfokú függvény hozzárendelési szabályát és grafikonját látod. Válaszd ki ezek közül azt, aminek van maximuma és add meg a tulajdonságait, jellemzőit a grafikon alatt található szövegmezőben!</label>
+            <iframe src="https://www.geogebra.org/notes/yezrmbzd?embed" 
+                width="800" height="600" 
+                allowfullscreen 
+                style="border: 1px solid #e4e4e4; border-radius: 4px;" 
+                frameborder="0">
+            </iframe>
+            <textarea name="kerdes1" rows="4" placeholder="Írd be a magyarázatot..."></textarea>
+        </div>
+                
+        <div class="question">
+            <label>2. A grafikonon felrajzolt másodfokú függvény két csúszka segítségével alakítható, transzformálható. A csúszkákat állítsd be úgy, hogy a megrajzolt másodfokú függvény pontosan illeszkedjen a berajzolt pontokra! A paraméterek beállításában segíthet, ha megnézed a pontok koordinátáit.</label>
+            <iframe src="https://www.geogebra.org/notes/bkrfvu8f?embed" 
+                width="800" height="600" 
+                allowfullscreen 
+                style="border: 1px solid #e4e4e4; border-radius: 4px;" 
+                frameborder="0">
+            </iframe>
+        </div>
+        
+        <div class="question">
+            <label>3. A feladatban szereplő \(f(x)=2x^2-5x+3\) függvény értékeit ki kell számolni és bele kell írni a táblázatba. A tizedestörtek beírásakor a vessző helyett pontot használj, mint pl. 2.34</label>
+            <iframe src="https://www.geogebra.org/notes/dezjw7za?embed" 
+                width="800" height="600" 
+                allowfullscreen 
+                style="border: 1px solid #e4e4e4; border-radius: 4px;" 
+                frameborder="0">
+            </iframe>
+        </div>
+
+        <div class="question">
+            <label>4. A matematikában jól ismert az ún. láncgörbe, amelynek alakja pontosan olyan, mintha egy nyakláncot két végénél felfüggesztenénk. Ezt a láncgörbét fekete színnel rajzoltuk meg a grafikonon. Egy csúszka segítségével próbáld meg úgy alakítani a piros színnel felrajzolt másodfokú függvényt, hogy az teljesen lefedje a láncgörbét!<br>
+            Észrevételeidet fogalmazd meg az alábbi szövegdobozban!</label>
+            <iframe src="https://www.geogebra.org/notes/ffmhp5yc?embed" 
+                width="800" height="600" 
+                allowfullscreen 
+                style="border: 1px solid #e4e4e4; border-radius: 4px;" 
+                frameborder="0">
+            </iframe>
+            <textarea name="kerdes4" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+       
+        <div class="question">
+            <label>5. Válaszd ki, hogy az alábbi függvények közül melyik egyezik meg az \(f(x)=x^2-6x+12\) függvénnyel!</label>
+            <div class="options">
+                <label><input type="radio" name="kerdes5" value="1"> \(x \mapsto (x-3)^2+12\)</label>
+                <label><input type="radio" name="kerdes5" value="2"> \(x \mapsto (x-3)^2-3\)</label>
+                <label><input type="radio" name="kerdes5" value="3"> \(x \mapsto (x-3)^2+3\)</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>6. Vizsgáld meg az \(f(x)=-3(x+5)^2-7\) függvényt és írd le a szöveges mezőbe a szélsőértékét!</label>
+            <textarea name="kerdes6" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+        
+        <div class="question">
+            <label>7. Hány zérushelye van az \(f(x)=-5x^2-2x-6\) másodfokú függvénynek?</label>
+            <div class="options">
+                <label><input type="radio" name="kerdes7" value="1"> 0</label>
+                <label><input type="radio" name="kerdes7" value="2"> 1</label>
+                <label><input type="radio" name="kerdes7" value="3"> 2</label>
+            </div>
+        </div> 
+        
+        <div class="question">
+            <label>8. A fizikában jól ismert, hogy a kezdősebességgel rendelkező, egyenletesen változó mozgást végző test által megtett út hossza:<br>
+            \(s=v_0 t+\frac{a}{2}t^2\), ahol \(v_0\) a test kezdeti sebessége, \(a\) a test gyorsulása, \(t\) az eltelt idő.<br>
+            Behelyettesítéssel számold ki, mekkora utat tesz meg az az autó, ami \(v_0=15\frac{m}{s}\) kezdősebességgel \(a=4\frac{m}{s^2}\) gyorsulással \(t=6s\)-ig egyenletesen gyorsít!<br>
+            Az eredményt írd be a szövegmezőbe!</label>
+            <textarea name="kerdes8" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+       
+        <div class="question">
+            <label>9. Az előző feladat nyomán, mekkora az autó kezdeti sebessége és gyorsulása, ha az alábbi függvény írja le a megtett út időbeli változását?<br>
+            \(s(t)=20 t-3t^2\)<br>
+            Az autó gyorsuló vagy lassuló mozgást végez?<br>
+            Válaszaidat a szövegmezőbe gépeld be!</label>
+            <textarea name="kerdes9" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+        
+        <div class="question">
+            <label>10. A grafikon a v kezdősebességgel ferdén elhajított kislabda pályáját mutatja be. A pálya alakját meghatározza a kislabda kezdősebessége, amit a v-vel jelölt csúszka segítségével tudsz állítani, és a hajítás vízszintessel bezárt szöge, amit az a-val jelölt csúszka segítségével tudsz állítani.<br>
+            Állítsd be úgy a csúszkákat, hogy az elhajított kislabda 12 méter távolságban érkezzen a talajra!</label>
+            <iframe src="https://www.geogebra.org/notes/rsa8st4p?embed" 
+                width="800" height="600" 
+                allowfullscreen 
+                style="border: 1px solid #e4e4e4; border-radius: 4px;" 
+                frameborder="0">
+            </iframe>
+        </div>
+
+        <div class="button-container">
+            <button type="button" onclick="nyomtat()">PDF-be nyomtatás</button>
+        </div>
+    </form>
+
+    <script>
+        function nyomtat() {
+            const tanuloNev = document.getElementById('tanuloNev').value;
+            if (!tanuloNev) {
+                alert("Add meg a nevedet és osztályodat a feladatlap elején!");
+                return;
+            }
+
+            // Nyomtatás előtt rövid várakozás, hogy a MathJax biztosan renderelődjön
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        }
+
+        // Form submit megakadályozása
+        document.getElementById('feladatForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            nyomtat();
+        });
+    </script>
+</body>
+</html>

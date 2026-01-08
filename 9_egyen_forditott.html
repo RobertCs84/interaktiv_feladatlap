@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egyenes és Fordított Arányosság</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            orphans: 3;  /* Minimum 3 sor az oldal alján */
+            widows: 3;   /* Minimum 3 sor az oldal tetején */
+        }
+        
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        .student-info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .student-info input {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fafafa;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+        }
+        
+        .question label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .options {
+            margin: 10px 0;
+        }
+        
+        .options label {
+            display: block;
+            margin: 8px 0;
+            font-weight: normal;
+            padding: 5px;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: vertical;  /* Csak magasságban átméretezhető */
+            box-sizing: border-box;
+            min-height: 100px;  /* Minimum magasság */
+        }
+        
+        iframe {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 15px 0;
+            max-width: 100%;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        /* Nyomtatási stílusok */
+        @media print {
+            body {
+                max-width: 100%;
+                padding: 10px;
+            }
+            
+            .button-container {
+                display: none;
+            }
+            
+            /* Intelligens oldaltörés kezelés */
+            .question {
+                page-break-inside: avoid;  /* A kérdés blokk ne törjön ketté */
+                page-break-after: auto;    /* Utána lehet oldaltörés */
+                border: 1px solid #ddd;
+                margin-bottom: 20px;
+            }
+            
+            /* Az iframe-eket megtartjuk nyomtatáskor */
+            iframe {
+                page-break-inside: avoid;  /* Grafikon ne törjön ketté */
+                page-break-before: auto;
+                page-break-after: avoid;   /* Utána ne legyen azonnal törés */
+                margin: 10px 0;
+                display: block;
+            }
+            
+            /* Textarea-k is maradjanak egyben */
+            textarea {
+                page-break-inside: avoid;
+                display: block;
+                border: 1px solid #999;
+                min-height: 80px;
+            }
+            
+            /* Ha egy kérdésben iframe + textarea van, próbáljuk együtt tartani */
+            iframe + label,
+            iframe + div {
+                page-break-before: avoid;  /* Ne legyen törés az iframe után */
+            }
+            
+            /* Címkék és input mezők is maradjanak együtt */
+            label {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            
+            /* Radio gombok csoportja ne törjön ketté */
+            .options {
+                page-break-inside: avoid;
+            }
+            
+            /* Fejléc ne törjön el a tartalomtól */
+            h2, .student-info {
+                page-break-after: avoid;
+            }
+        }
+        
+        /* Responsív dizájn mobilra */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            iframe {
+                width: 100% !important;
+                height: 400px !important;
+            }
+            
+            .student-info input {
+                width: 100%;
+            }
+            
+            textarea {
+                font-size: 16px; /* Megakadályozza a zoom-ot iOS-en */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Egyenes- és fordított arányosság - ONLINE FELADATLAP</h2>
+    
+    <div class="student-info">
+        <label for="tanuloNev">Név, osztály: 
+            <input type="text" id="tanuloNev" placeholder="Tanuló neve, osztálya" required>
+        </label>
+    </div>
+    
+    <form id="feladatForm">
+        <div class="question">
+            <label>1. Írd le, mikor mondjuk két mennyiség kapcsolatára, hogy egyenes arányosság van közöttük!</label>
+            <textarea name="kerdes1" rows="4" placeholder="Írd be a magyarázatot..."></textarea>
+        </div>
+                
+        <div class="question">
+            <label>2. A három leírás közül melyik az, amelyikben a két mennyiség kapcsolata egyenesen arányos?</label>
+            <div class="options">
+                <label>
+                    <input type="radio" name="kerdes2" value="1"> 
+                    Egy gépjárművezető 50 km/h sebességről minden percben 2 km/h sebességgel növeli az autó sebességét, amíg el nem éri a 120 km/h sebességet.
+                </label>
+                <label>
+                    <input type="radio" name="kerdes2" value="2"> 
+                    Egy konyhai mérlegre egy nagyobb edényt helyezünk, majd tárazzuk a mérleget. Beletöltünk 1 dl étolajat, majd még 1 dl csapvizet, majd még 1 dl cukorszirupot és minden esetben feljegyezzük a mért tömeget.
+                </label>
+                <label>
+                    <input type="radio" name="kerdes2" value="3"> 
+                    Egy gyalogos otthonról indulva 1 óra alatt 4 km, 3 óra alatt 12 km hosszú utat gyalogol le.
+                </label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>3. Jelöld meg, melyik grafikon mutat két mennyiség között egyenes arányosságot! Indokold meg választásodat a szövegmezőben!</label>
+            <iframe scrolling="no" title="egyenes_aranyossag1" 
+                src="https://www.geogebra.org/material/iframe/id/su7ekwpm/width/700/height/500/border/888888/sfsb/true/smb/false/stb/true/stbh/false/ai/false/asb/true/sri/false/rc/true/ld/false/sdz/true/ctl/false" 
+                width="700" height="500">
+            </iframe>
+            <div class="options">
+                <label><input type="radio" name="kerdes3_valasztas" value="f"> f</label>
+                <label><input type="radio" name="kerdes3_valasztas" value="g"> g</label>
+                <label><input type="radio" name="kerdes3_valasztas" value="h"> h</label>
+            </div>
+            <label>Indoklás:</label>
+            <textarea name="kerdes3_indoklas" rows="4" placeholder="Írd be a magyarázatot..."></textarea>
+        </div>
+
+        <div class="question">
+            <label>4. Egy csapból 3 óra alatt egyenletes sebességgel 4,5 \(m^3\) víz folyott ki. Töltsd ki a táblázat hiányzó oszlopát!<br> 
+            A tizedestörtek beírásakor a vessző helyett pontot használj, mint pl. 2.5!</label>
+            <iframe scrolling="no" title="Vízmennyiség változása" 
+                src="https://www.geogebra.org/material/iframe/id/btq22d7u/width/700/height/500/border/888888/sfsb/true/smb/false/stb/false/stbh/false/ai/false/asb/false/sri/false/rc/false/ld/false/sdz/true/ctl/false" 
+                width="700" height="500">
+            </iframe>
+            <label>Hogyan nézne ki a grafikon, ha minden időpillanatra kiszámoltuk volna a csapból kifolyt vízmennyiséget? (Akkor is pontok lennének a grafikonon?) Válaszodat írd le!</label>            
+            <textarea name="kerdes4" rows="4" placeholder="Írd be a magyarázatot..."></textarea>
+        </div>
+        
+        <div class="question">
+            <label>5. Az előző feladatban leírt csapból 9 óra alatt mennyi víz folyott ki a csapon keresztül?</label>
+            <textarea name="kerdes5" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+        
+        <div class="question">
+            <label>6. Hány óra alatt folyik ki 5 \(m^3\) víz ugyanezen a csapon keresztül?</label>
+            <textarea name="kerdes6" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+       
+        <div class="question">
+            <label>7. Foglald össze írásban, hogy két mennyiség ha fordítottan arányos egymással, annak milyen jellemzői vannak!</label>
+            <textarea name="kerdes7" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div> 
+        
+        <div class="question">
+            <label>8. Jelöld meg, melyik leírásban fedezhető fel fordított arányosság a mennyiségek között!</label>
+            <div class="options">
+                <label>
+                    <input type="radio" name="kerdes8" value="1"> 
+                    Egy gépjármű 50 km/h sebességgel 3 h alatt tette meg az utat. Egy másik napon ugyanazt az utat 100 km/h sebességgel 1,5 h alatt tette meg.
+                </label>
+                <label>
+                    <input type="radio" name="kerdes8" value="2"> 
+                    Egy medencében vízszivárgás miatt a vízszint minden órában 5 cm-rel csökken.
+                </label>
+                <label>
+                    <input type="radio" name="kerdes8" value="3"> 
+                    A boltban egy bizonyos termék ára 350 Ft. Egy akció keretében ha ebből a termékből 3-at veszünk, akkor egy ingyen van.
+                </label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>9. A grafikon két mennyiség kapcsolatát mutatja be. A tanult ismeretek alapján vizsgáld meg a grafikont! Döntsd el, hogy fordított arányosságot szemléltet-e az ábra! Állításodat részletesen indokold!</label>
+            <iframe src="https://www.geogebra.org/notes/uepj4djm?embed" 
+                width="800" height="600" 
+                allowfullscreen 
+                style="border: 1px solid #e4e4e4; border-radius: 4px;" 
+                frameborder="0">
+            </iframe>
+            <textarea name="kerdes9" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+        
+        <div class="question">
+            <label>10. Egy bizonyos pénzösszegből 60 db csokiszeletet tudunk vásárolni 640 Ft/db áron. Akció keretében most 500 Ft-ért tudjuk megvásárolni darabját. Ugyanabból a keretösszegből hány db csokiszeletet tudunk vásárolni?<br>
+            Írd le a számolás menetét a szövegmezőbe! A végeredményt egész számra kerekítve add meg!</label>
+            <textarea name="kerdes10" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+
+        <div class="button-container">
+            <button type="button" onclick="nyomtat()">PDF-be nyomtatás</button>
+        </div>
+    </form>
+
+    <script>
+        function nyomtat() {
+            const tanuloNev = document.getElementById('tanuloNev').value;
+            if (!tanuloNev) {
+                alert("Add meg a nevedet és osztályodat a feladatlap elején!");
+                return;
+            }
+
+            // Nyomtatás előtt rövid várakozás, hogy a MathJax biztosan renderelődjön
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        }
+
+        // Form submit megakadályozása (ha valaki véletlenül Enter-t nyom)
+        document.getElementById('feladatForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            nyomtat();
+        });
+    </script>
+</body>
+</html>

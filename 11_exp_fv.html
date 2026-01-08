@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exponenciális függvények</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            orphans: 3;
+            widows: 3;
+        }
+        
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        .student-info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+        
+        .student-info input {
+            padding: 8px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fafafa;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+        }
+        
+        .question label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .options {
+            margin: 10px 0;
+        }
+        
+        .options label {
+            display: block;
+            margin: 8px 0;
+            font-weight: normal;
+            padding: 5px;
+        }
+        
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: vertical;
+            box-sizing: border-box;
+            min-height: 100px;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        
+        iframe {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 15px 0;
+            max-width: 100%;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        /* Nyomtatási stílusok */
+        @media print {
+            body {
+                max-width: 100%;
+                padding: 10px;
+            }
+            
+            .button-container {
+                display: none;
+            }
+            
+            /* Intelligens oldaltörés kezelés */
+            .question {
+                page-break-inside: avoid;
+                page-break-after: auto;
+                border: 1px solid #ddd;
+                margin-bottom: 20px;
+            }
+            
+            /* Az iframe-eket megtartjuk nyomtatáskor */
+            iframe {
+                page-break-inside: avoid;
+                page-break-before: auto;
+                page-break-after: avoid;
+                margin: 10px 0;
+                display: block;
+            }
+            
+            /* Textarea-k is maradjanak egyben */
+            textarea {
+                page-break-inside: avoid;
+                display: block;
+                border: 1px solid #999;
+                min-height: 80px;
+            }
+            
+            /* Input mezők */
+            input[type="text"] {
+                page-break-inside: avoid;
+                border: 1px solid #999;
+            }
+            
+            /* Ha egy kérdésben iframe + textarea van */
+            iframe + label,
+            iframe + div,
+            iframe + textarea {
+                page-break-before: avoid;
+            }
+            
+            /* Címkék és input mezők együtt */
+            label {
+                page-break-after: avoid;
+                page-break-inside: avoid;
+            }
+            
+            /* Radio gombok csoportja */
+            .options {
+                page-break-inside: avoid;
+            }
+            
+            /* Fejléc ne törjön el */
+            h2, .student-info {
+                page-break-after: avoid;
+            }
+        }
+        
+        /* Responsív dizájn mobilra */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            iframe {
+                width: 100% !important;
+                height: 400px !important;
+            }
+            
+            .student-info input {
+                width: 100%;
+            }
+            
+            textarea, input[type="text"] {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Exponenciális függvények - ONLINE FELADATLAP</h2>
+    
+    <div class="student-info">
+        <label for="tanuloNev">Név, osztály: 
+            <input type="text" id="tanuloNev" placeholder="Tanuló neve, osztálya" required>
+        </label>
+    </div>
+    
+    <form id="feladatForm">
+        <div class="question">
+            <label>1. Az ábrán három exponenciális függvény hozzárendelési szabályát és grafikonját látod. Válaszd ki ezek közül azt, ami szigorúan monoton csökkenő tulajdonsággal jellemezhető és add meg a további tulajdonságait, jellemzőit a grafikon alatt található szövegmezőbe!</label>
+            <iframe src="https://www.geogebra.org/notes/hjdfuqcu?embed" 
+                width="800" height="600" 
+                allowfullscreen 
+                style="border: 1px solid #e4e4e4; border-radius: 4px;" 
+                frameborder="0">
+            </iframe>
+            <textarea name="kerdes1" rows="4" placeholder="Írd be a magyarázatot..."></textarea>
+        </div>
+                
+        <div class="question">
+            <label>2. A grafikonon felrajzolt exponenciális függvény három csúszka segítségével alakítható, transzformálható. A csúszkákat állítsd be úgy, hogy a megrajzolt exponenciális függvény pontosan illeszkedjen a berajzolt pontokra! A paraméterek beállításában segíthet, ha megnézed a pontok koordinátáit.</label>
+            <iframe src="https://www.geogebra.org/notes/nxcmrtjg?embed" 
+                width="800" height="600" 
+                allowfullscreen 
+                style="border: 1px solid #e4e4e4; border-radius: 4px;" 
+                frameborder="0">
+            </iframe>
+        </div>
+        
+        <div class="question">
+            <label>3. A feladatban szereplő \(f(x)=0.2^x\) függvény értékeit ki kell számolni és bele kell írni a táblázatba. A tizedestörtek beírásakor a vessző helyett pontot használj, mint pl. 2.34</label>
+            <iframe src="https://www.geogebra.org/notes/dz7sv3ht?embed" 
+                width="800" height="600" 
+                allowfullscreen 
+                style="border: 1px solid #e4e4e4; border-radius: 4px;" 
+                frameborder="0">
+            </iframe>
+        </div>
+
+        <div class="question">
+            <label>4. A bankban kamatos kamatra lekötött pénzösszeg évenkénti növekedését a \(t \mapsto 250\,000 \cdot 1{,}04^t\) függvény adja meg. Válaszolj az alábbi kérdésekre!<br>
+            a) Kezdetben hány forintot kötöttünk le?<br>
+            b) Évente hányszorosára nő a bankba elhelyezett pénzünk?<br>
+            Válaszodat az alábbi szöveges mezőbe írd be!</label>
+            <textarea name="kerdes4" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+       
+        <div class="question">
+            <label>5. Számold ki az előző feladat alapján, hogy 10 év múlva mekkora lesz a bankban elhelyezett pénzösszeg?<br>
+            Válaszodat egészre kerekítve írd be az alábbi szöveges mezőbe!</label>
+            <input type="text" name="kerdes5" placeholder="Írd be a választ">
+        </div>
+        
+        <div class="question">
+            <label>6. Az osztódással szaporodó baktériumok száma – rövid alkalmazkodási periódus után, és mindaddig, amíg ezt a környezet lehetővé teszi – exponenciális növekedést mutat. Egy 1 ml-es laboratóriumi mintában a kutatók egy adott időpontban körülbelül 120 millió baktériumot számoltak, egy óra múlva 180 milliót.<br>
+            Jelöld meg azt a képletet, amely az első mérés idejétől eltelt idő függvényében megadja a baktériumok számát!</label>
+            <div class="options">
+                <label><input type="radio" name="kerdes6" value="1"> \(t \mapsto 120 \cdot 2^t\)</label>
+                <label><input type="radio" name="kerdes6" value="2"> \(t \mapsto 180 \cdot 2^{-t}\)</label>
+                <label><input type="radio" name="kerdes6" value="3"> \(t \mapsto 120 \cdot 1{,}5^t\)</label>
+            </div>
+        </div>
+        
+        <div class="question">
+            <label>7. A fizikában jól ismert jelenség, hogy ha valamilyen sugárzás valamilyen közegen halad keresztül, akkor a sugárzás erőssége a közegben megtett távolsággal egyre jobban gyengül. Például a röntgenkép elkészítésekor ezért viselnek a nővérek ólomból készült köpenyt, ami gyengíti az Őket érő röntgensugárzás erősségét.<br>
+            Az alábbi képletekben \(I_0\) - a sugárzás kezdeti erőssége, \(x\) - a sugárzás közegben megtett útja, \(I\) - a sugárzás x hosszú távolság megtétele után mért erőssége.<br>
+            Melyik összefüggés írhatja le helyesen a sugárzás gyengülésének mértékét? Válaszd ki a helyeset!</label>
+            <div class="options">
+                <label><input type="radio" name="kerdes7" value="1"> \(I_0 = I \cdot 2^{-\frac{x}{D}}\)</label>
+                <label><input type="radio" name="kerdes7" value="2"> \(I = I_0 \cdot 2^{-\frac{x}{D}}\)</label>
+                <label><input type="radio" name="kerdes7" value="3"> \(I = I_0 \cdot 2^{\frac{x}{D}}\)</label>
+            </div>
+        </div>
+       
+        <div class="question">
+            <label>8. Az 1800-as évek végétől számos fontos felfedezés született a fizikában. Többek között ebben az időszakban fedezték fel, hogy vannak olyan atommagok, amelyek instabil állapotban vannak és sugárzást bocsátanak ki, bomlanak ami által egy stabil állapotú atommag keletkezik. A kibocsátott sugárzást radioaktív sugárzásnak, a teljes folyamatot radioaktív bomlásnak nevezzük.<br>
+            Kiderült, hogy a radioaktív anyagok atommagjainak száma az anyagra jellemző mértékben bizonyos idő elteltével megfelezödik. Így meg lehet adni egy összefüggést, ami megadja az elbomlatlan atommagok számát t idő elteltével.<br>
+            \(N=N_0 \cdot (\frac{1}{2})^{\frac{t}{T}}\), ahol \(N_0\) a radioaktív atommagok kezdeti száma, \(T\) az anyagra jellemző felezési idő és \(t\) az eltelt idő. Ezt az összefüggést más alakban is fel szokták írni.<br>
+            Jelöld meg azt az összefüggést, ami a fentivel megegyező módon számolja ki az elbomlatlan atommagok számát!</label>
+            <div class="options">
+                <label><input type="radio" name="kerdes8" value="1"> \(N = N_0 \cdot 2^{\frac{T}{t}}\)</label>
+                <label><input type="radio" name="kerdes8" value="2"> \(N = N_0 \cdot 2^{-\frac{T}{t}}\)</label>
+                <label><input type="radio" name="kerdes8" value="3"> \(N = N_0 \cdot 2^{-\frac{t}{T}}\)</label>
+            </div>
+        </div> 
+        
+        <div class="question">
+            <label>9. Egyes betegségek vizsgálatakor végeznek olyan vizsgálatokat, ahol a betegnek radioaktív anyagot kell bevennie. A radioaktív atommagok bomlásakor keletkező sugárzást használják fel képalkotásra, a szervek működésének vizsgálatára, stb. Az egyik ilyen radioaktív elem a szén 11-es számú izotópja, amelynek felezési ideje kb. 20 perc.<br>
+            Fontos az ilyen vizsgálatoknál, hogy a vizsgált személy szervezetében minél hamarabb lecsökkenjen a még el nem bomlott atommagok száma. Ezért használnak rövid felezési idejű radioaktív részecskéket.<br>
+            Zsebszámológép segítségével vizsgáld meg az \(N=N_0 \cdot (\frac{1}{2})^{\frac{t}{T}}\) összefüggésbe helyettesítve az értékeket, hogy kb. hány óra múlva csökken 1000 db-ról a negyedére a még el nem bomlott atommagok száma a vizsgált beteg szervezetében! Eredményedet szövegesen írd le ide!</label>
+            <textarea name="kerdes9" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+        
+        <div class="question">
+            <label>10. A grafikon egy a sütőből frissen kivett 120 celsius fokos hőmérsékletű kenyér lehűlését mutatja be.<br>
+            Newton lehűlési törvénye alapján megállapítható, hogy a testek hőmérséklete adott körülmények között exponenciálisan csökken az idő múlásával.<br>
+            A ceruza eszközzel jelöld meg a grafikon azon pontjait, amelyek 30 és 60 perc elteltével mutatják a kenyér hőmérsékletét! Olvasd le és számold ki, mekkora a hőmérsékletcsökkenés nagysága 30 perc és 60 perc elteltével! Írd le az eredményt!</label>
+            <iframe src="https://www.geogebra.org/notes/bxczxhcd?embed" 
+                width="800" height="600" 
+                allowfullscreen 
+                style="border: 1px solid #e4e4e4; border-radius: 4px;" 
+                frameborder="0">
+            </iframe>
+            <textarea name="kerdes10" rows="4" placeholder="Írd be a válaszodat..."></textarea>
+        </div>
+
+        <div class="button-container">
+            <button type="button" onclick="nyomtat()">PDF-be nyomtatás</button>
+        </div>
+    </form>
+
+    <script>
+        function nyomtat() {
+            const tanuloNev = document.getElementById('tanuloNev').value;
+            if (!tanuloNev) {
+                alert("Add meg a nevedet és osztályodat a feladatlap elején!");
+                return;
+            }
+
+            // Nyomtatás előtt rövid várakozás, hogy a MathJax biztosan renderelődjön
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        }
+
+        // Form submit megakadályozása
+        document.getElementById('feladatForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            nyomtat();
+        });
+    </script>
+</body>
+</html>
